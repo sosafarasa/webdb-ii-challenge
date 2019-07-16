@@ -4,7 +4,7 @@ const db = require('../data/db-config.js');
 
 const router = express.Router();
 
-router.get('/api/zoos', (req, res) => {
+router.get('/', (req, res) => {
    
     db('zoos')
     .then(zoos => {
@@ -15,7 +15,7 @@ router.get('/api/zoos', (req, res) => {
     })
 });
   
-router.get('/api/zoos/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     db('zoos')
     .where({id: req.params.id})
     .then(zoo => {
@@ -31,12 +31,12 @@ router.get('/api/zoos/:id', (req, res) => {
     })
 });
     
-router.post('/api/zoos', (req, res) => {
+router.post('/', (req, res) => {
 
     db('zoos')
     .insert(req.body)
-    .then(role => {
-    const [id] = role;
+    .then(zoo => {
+    const [id] = zoo;
 
     db('zoos')
     .where({id})
@@ -50,7 +50,7 @@ router.post('/api/zoos', (req, res) => {
     })
 });
     
-router.put('/api/zoos/:id', (req, res) => {
+router.put('/:id', (req, res) => {
 
     db('zoos')
     .where({id: req.params.id})
@@ -72,7 +72,7 @@ router.put('/api/zoos/:id', (req, res) => {
     })
 });
     
-router.delete('/api/zoos/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     db('zoos')
     .where({id: req.params.id})
     .del() 
